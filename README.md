@@ -1,38 +1,30 @@
-# create-svelte
+# Bug reproducer
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+```shell
+npm i
 npm run build
+npx wrangler dev --local
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```console
+curl -v localhost:8787/_app/foo
+*   Trying 127.0.0.1:8787...
+* Connected to localhost (127.0.0.1) port 8787 (#0)
+> GET /_app/foo HTTP/1.1
+> Host: localhost:8787
+> User-Agent: curl/7.86.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 500 Internal Server Error
+< Content-Type: text/plain; charset=UTF-8
+< Date: Thu, 02 Mar 2023 20:37:39 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+<
+KVError: could not find _app/foo/index.html in your content namespace
+    at /home/tv/src/others/sveltejs/sveltekit-issueXXX-cloudflare-adapter-404/.svelte-kit/cloudflare-workers-tmp/node_modules/@cloudflare/kv-asset-handler/dist/index.js:247:19
+    at Generator.next (<anonymous>)
+* Connection #0 to host localhost left intact
+```
