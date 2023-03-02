@@ -1,4 +1,4 @@
-name = "sveltekit-issuexxx-cloudflare-adapter-404"
+name = "sveltekit-issue9288-cloudflare-adapter-404"
 
 main = "./.cloudflare/worker.js"
 site.bucket = "./.cloudflare/public"
